@@ -1,0 +1,36 @@
+name: Deploy to Snowflake via Liquibase
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  liquibase-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Install Liquibase CLI
+        run: |
+          curl -sL https://github.com/liquibase/liquibase/releases/download/v4.24.0/liquibase-4.24.0.tar.gz -o liquibase.tar.gz
+          mkdir liquibase-cli
+          tar -xzf liquibase.tar.gz -C liquibase-cli
+          chmod +x liquibase-cli/liquibase
+
+      - name: Run Liquibase Update
+        run: |
+          ./liquibase-cli/liquibase \
+            --url="${{ secrets.SF_URL }}?warehouse=${{ secrets.SF_WAREHOUSE }}&db=${{ secrets.SF_DATABASE }}&schema=${{ secrets.SF_SCHEMA }}&role=${{ secrets.SF_ROLE }}" \
+            --username="${{ secrets.SF_USER }}" \
+            --password="${{ secrets.SF_PASSWORD }}" \
+            --changeLogFile=liquibase/changelog/liquibase-master.xml \
+            update
