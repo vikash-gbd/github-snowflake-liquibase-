@@ -26,10 +26,10 @@ jobs:
           tar -xzf liquibase.tar.gz -C liquibase-cli
           chmod +x liquibase-cli/liquibase
 
-      - name: Run Liquibase Update
+      - name: Run Liquibase Update on Snowflake
         run: |
           ./liquibase-cli/liquibase \
-            --url="${{ secrets.SF_URL }}?warehouse=${{ secrets.SF_WAREHOUSE }}&db=${{ secrets.SF_DATABASE }}&schema=${{ secrets.SF_SCHEMA }}&role=${{ secrets.SF_ROLE }}" \
+            --url="jdbc:snowflake://${{ secrets.SF_URL }}?warehouse=${{ secrets.SF_WAREHOUSE }}&db=${{ secrets.SF_DATABASE }}&schema=${{ secrets.SF_SCHEMA }}&role=${{ secrets.SF_ROLE }}" \
             --username="${{ secrets.SF_USER }}" \
             --password="${{ secrets.SF_PASSWORD }}" \
             --changeLogFile=liquibase/changelog/liquibase-master.xml \
