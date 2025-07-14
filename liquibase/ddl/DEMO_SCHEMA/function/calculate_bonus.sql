@@ -2,5 +2,5 @@ CREATE OR REPLACE FUNCTION DEMO_SCHEMA.calculate_bonus(hours NUMBER)
 RETURNS NUMBER
 AS
 $$
-  SELECT hours * 0.10;
+  RETURN hours * 0.10;
 $$;
