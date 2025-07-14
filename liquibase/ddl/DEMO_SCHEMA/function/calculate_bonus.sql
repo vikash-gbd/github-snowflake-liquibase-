@@ -3,5 +3,5 @@ RETURNS NUMBER
 LANGUAGE SQL
 AS
 $$
-  RETURN hours * 0.10;
+  hours * 0.10
 $$;
