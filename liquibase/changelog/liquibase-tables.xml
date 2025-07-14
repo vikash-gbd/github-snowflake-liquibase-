@@ -9,21 +9,18 @@
     <includeAll
         path="../../ddl/DEMO_SCHEMA/table"
         relativeToChangelogFile="true"
-        errorIfMissingOrEmpty="false"
-        resourceFilter=".*\.sql" />
+        errorIfMissingOrEmpty="false" />
 
     <!-- Auto-include all .sql files under function/ -->
     <includeAll
         path="../../ddl/DEMO_SCHEMA/function"
         relativeToChangelogFile="true"
-        errorIfMissingOrEmpty="false"
-        resourceFilter=".*\.sql" />
+        errorIfMissingOrEmpty="false" />
 
     <!-- Auto-include all .sql files under view/ -->
     <includeAll
         path="../../ddl/DEMO_SCHEMA/view"
         relativeToChangelogFile="true"
-        errorIfMissingOrEmpty="false"
-        resourceFilter=".*\.sql" />
+        errorIfMissingOrEmpty="false" />
 
 </databaseChangeLog>
